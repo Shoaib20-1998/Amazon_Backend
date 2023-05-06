@@ -56,6 +56,24 @@ const CartdeleteProduct=async(req,res)=>{
     }
 }
 
+const CartdeletesingleProduct=async(req,res)=>{
+
+     const{id}=req.params
+     let getsingledata= await Product.findOne({_id:id})
+    try {     
+        if(req.body.userId==getsingledata.userId){
+            let deletethdata= await Product.findByIdAndDelete({_id:id})
+            res.status(200).send({"msg":"Product deleted Successfully"})  
+        }else{
+            res.status(400).send({"msg":"you are not Authorized"})
+        }
+            
+               
+    } catch (error) {
+        res.status(400).send(error)      
+    }
+
+}
 const CartupdateProduct=async(req,res)=>{
 
     const{id}=req.params
@@ -73,5 +91,5 @@ const CartupdateProduct=async(req,res)=>{
     }
 }
 module.exports={
-    CartPostProduct,CartgetProduct,CartdeleteProduct,CartupdateProduct
+  CartPostProduct,CartgetProduct,CartdeleteProduct,CartupdateProduct,CartdeletesingleProduct
 }
