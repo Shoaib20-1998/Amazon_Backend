@@ -1,7 +1,7 @@
 const { Order }=require('../Models/orderhistory.model')
 const Bookorder=async(req,res)=>{
     try {
-        const NewOrder= new Order(req.body)
+        const NewOrder= new Order.insertMany(req.body)
         await NewOrder.save()
         res.status(200).send({"msg":"Order Placed Successfully"})
     } catch (error) {
