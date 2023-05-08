@@ -1,8 +1,8 @@
 const { Order }=require('../Models/orderhistory.model')
 const Bookorder=async(req,res)=>{
     try {
-        const NewOrder= new Order.insertMany(req.body)
-        await NewOrder.save()
+        const NewOrder= Order.insertMany(req.body)
+        // await NewOrder.save()
         res.status(200).send({"msg":"Order Placed Successfully"})
     } catch (error) {
         res.status(400).send(error)
@@ -14,8 +14,7 @@ const Getorder=async(req,res)=>{
         const Getallorders= await Order.find({userId:req.body.userId})
         res.status(200).send(Getallorders)
     } catch (error) {
-        res.status(400).send(error)
-        
+        res.status(400).send(error)        
     }
 }
 
