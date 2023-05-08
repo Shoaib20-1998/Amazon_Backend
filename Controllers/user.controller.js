@@ -27,7 +27,7 @@ const{email,password}=req.body
         bcrypt.compare(password, Logindata.password, function(err, result) {
             if(result){
                 const token = jwt.sign({ userId: Logindata._id }, process.env.SecretKey)
-                res.status(200).send({"Token":token})
+                res.status(200).send({"user":Logindata,"Token":token})
             }else{
                 res.status(400).send({"msg":"Wrong Credential"})
             }           
